@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+xsd beschreibt stabile domänenübergreifende Attribute
+Version: 1.0
+Autor: Michael Heinke
+Erstellt: 27 Mai 2014
+Approved by:
+__________________________________________
+Revision History:
+1.51 14.03.2018 - Heinke - string128, 
+1.49 31.01.2018 - Heinke - beschreibung, 
+1.48 16.01.2018 - Heinke - string8, 
+1.47 12.12.2017 - Heinke - string300, 
+1.46 08.12.2017 - Heinke - string4000, 
+1.45 15.11.2017 - Heinke - identifierType, 
+1.42 18.10.2017 - Heinke - wertung, 
+1.41 07.09.2017 - Heinke - token1024, ouIdentifier, 
+1.40 30.08.2017 - Heinke - quartal, 
+1.39 26.07.2017 - iuabi - string 64, 80, 1024, 
+1.38 28.06.2017 - iuabi - dec9f6, 
+1.37 26.05.2017 - iuabi - dec9f2, 
+1.36 16.05.2017 - iuabi - sortierkennzeichen, 
+1.35 17.02.2017 - iuabi - schlagwort, 
+1.34 10.02.2017 - iuabi - weitereSaetzeVorhanden, 
+1.33 26.01.2017 - iuabi - offset, 
+1.32 20.01.2017 - iuabi - string21
+1.31 16.12.2016 - iuabi - string25
+1.30 16.12.2016 - iuabi - string11, string35
+1.29 30.11.2016 - iuabi - string6, dec10f7, dec19f16, dec5f4
+1.28 29.11.2016 - iuabi - posInt5
+1.27 25.11.2016 - iuabi - string100
+1.26 16.11.2016 - iuabi - string32
+1.25 09.11.2016 - iuabi - string16, posInt1, posInt10
+1.24 12.10.2016 - iuabi - anzahl, dec7f2, string15, posIntXX
+1.23 13.09.2016 - iuabi - string15
+1.22 29.07.2016 - iuabi - JahrMonatType korrigiert
+1.21 22.07.2016 - iuabi - string4
+1.20 22.07.2016 - iuabi - string9, string2000, dec10f4
+1.19 24.02.2016 - iuabi - string3
+1.18 23.02.2016 - iuabi - Typen für gueltigAb und gueltigBis
+1.17 04.02.2016 - iuabi - nonNegInt4
+1.16 26.01.2016 - iuabi - Element ergänzt: gueltigAb gueltigBis
+1.15 07.01.2016 - iuabi - Typ ergänzt: versionsnummer
+1.14 30.11.2015 - iuabi - Typ ergänzt: jahrMonat externerAuftragsschluessel
+1.13 16.11.2015 - iuabi - Typ ergänzt: jahrMonat
+1.12 12.11.2015 - iuabi - Typen ergänzt: stringXX
+1.11 12.10.2015 - iuabi - zeitstempel zu datetime korrigiert
+1.10 01.10.2015 - iuabi - Typ ergänzt: ampelStatus
+1.9   23.09.2015 - iuabi - Typen ergänzt: systemKennung
+1.8   23.09.2015 - iuabi - Typen ergänzt: zeitstempel
+1.7   10.09.2015 - iuabi - Typen ergänzt: jahr, datum, zeit
+1.5   08.07.2015 - iuabi - Typen ergänzt:dec7f4, nonNegInt3, tagMonat
+1.4   24.06.2015 - iuwbs - jaNeinUnbekanntType - ergänzt
+1.3   07.04.2015 - iuabi - dec5f2 ergänzt
+1.2   07.04.2015 - iuabi - dec15f2 ergänzt
+1.1   10.06.2014 - iuabi - FOB ergänzt (FremdOrdnungsBegriff).
+1.0   27.05.2014 - iuabi - XSD-Definition erstellt.
+__________________________________________
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:kcom="http://svi.de/kdf/ei/common/v1" targetNamespace="http://svi.de/kdf/ei/common/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Enthält allgemeine Attribute, die domänenübergreifend einsetzbar sind und nicht selber einer Domäne zuordenbar sind</xs:documentation>
+	</xs:annotation>
+	<!-- ########## KDF Fragmente ############-->
+	<xs:element name="lfdNummer" type="kcom:lfdNummerType"/>
+	<xs:element name="identifier" type="xs:unsignedInt">
+		<xs:annotation>
+			<xs:documentation>
+				allgemeiner Typ für technische IDs eines Businessobjektes, i.d.R. aus DB-Sequences
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="valuta" type="kcom:valutaType"/>
+	<xs:element name="offset" type="kcom:offsetType">
+		<xs:annotation>
+			<xs:documentation>Nummer des ersten zurückzugebenden Datensatzes (Pagination, Verwendung in Kombination mit ei.common.Anzahl)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="weitereSaetzeVorhanden" type="kcom:weitereSaetzeVorhandenType">
+		<xs:annotation>
+			<xs:documentation>Flag, dass weitere Datensätze vorliegen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="anzahl" type="kcom:anzahlType"/>
+	<xs:element name="gueltigAbDatum" type="kcom:datumType">
+		<xs:annotation>
+			<xs:documentation>Gueltigkeits-Beginndatum eines Objektes</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="gueltigBisDatum" type="kcom:datumType">
+		<xs:annotation>
+			<xs:documentation>Gueltigkeits-Endedatum eines Objektes</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="systemKennung" type="kcom:systemKennungType">
+		<xs:annotation>
+			<xs:documentation>eine systemspezifische Kennung, die die Identifikation eine physischen/logischen Instanz des Systems erlaubt</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fremdOrdnungsbegriff" type="kcom:fremdOrdnungsbegriffType"/>
+	<xs:element name="externerAuftragsschluessel" type="kcom:externerAuftragsschluesselType"/>
+	<xs:element name="versionsnummer" type="kcom:versionsnummerType"/>
+	<xs:element name="schlagwort" type="kcom:schlagwortType">
+		<xs:annotation>
+			<xs:documentation>Schlagworte zu einem Vorgang</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sortierkennzeichen" type="kcom:sortierkennzeichenType">
+		<xs:annotation>
+			<xs:documentation>Kennzeichen am Einzelelement welches für Sortierung verwendet wird (z.B. am Produktbaustein, Deckung etc.). Der Sortieralgorithmus ist vom Consumer zu implementieren.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="quartal" type="kcom:quartalType">
+		<xs:annotation>
+			<xs:documentation>Quartal des Jahres: 1-4, falls Jahr benötigt, dieses im separaten jahrType übergeben</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="token1024" type="kcom:token1024Type">
+		<xs:annotation>
+			<xs:documentation>Hashwert/Token der Länge 1024</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ouIdentifier" type="kcom:ouIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Der technische Identifier der Organisationseinheit (OU organizational unit)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="username" type="kcom:usernameType">
+		<xs:annotation>
+			<xs:documentation>Ein nicht näher spezifizierter Benutzername (technisch oder auch persönlich)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="wertung" type="kcom:wertungType">
+		<xs:annotation>
+			<xs:documentation>Skala zur Bewertung von Sachverhalten: 1 schlecht, bis 5 gut</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="beschreibung" type="kcom:beschreibungType">
+		<xs:annotation>
+			<xs:documentation>Beschreibung der Sache (Objekt, Vertrag, Deckung,..) statt expliziter Beschreibungsfelder wie nachweisartbeschreibung, beschreibungObjekt,...</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- ########## public types ############-->
+	<xs:simpleType name="identifierType">
+		<xs:annotation>
+			<xs:documentation>
+				allgemeiner Typ für technische IDs eines Businessobjektes, i.d.R. aus DB-Sequences
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="gueltigAbDatumType">
+		<xs:annotation>
+			<xs:documentation>Gueltigkeits-Beginndatum einer Eigenschaft eines Objektes. Für Objekte selbst Ref auf das Element gueltigAbDatum verwenden</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:datumType"/>
+	</xs:simpleType>
+	<xs:simpleType name="gueltigBisDatumType">
+		<xs:annotation>
+			<xs:documentation>Gueltigkeits-Endedatum einer Eigenschaft eines Objektes. Für Objekte selbst Ref auf das Element gueltigBisDatum verwenden</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:datumType"/>
+	</xs:simpleType>
+	<xs:simpleType name="externerAuftragsschluesselType">
+		<xs:annotation>
+			<xs:documentation>Beliebiger Wert zur Kennzeichnung eines Auftrags durch den Auftraggeber.
+Diese ID wird zur Kommunikation innerhalb der Systeme weitergegeben und wird in den Rückgabeparametern unverändert übernommen
+und zurückgeliefert.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec15f2Type">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 15 Ziffern insgesamt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="15"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec9f2Type">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 9 Ziffern insgesamt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="9"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec7f1Type">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Betragstyp mit 1 Nachkommastelle, maximal 7 Ziffern insgesamt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="7"/>
+			<xs:fractionDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec7f2Type">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 7 Ziffern insgesamt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="7"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec5f2Type">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 5 Ziffern insgesamt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec5f4Type">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Betragstyp mit 4 Nachkommastellen, maximal 5 Ziffern insgesamt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="5"/>
+			<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec10f4Type">
+		<xs:annotation>
+			<xs:documentation>Betragstyp mit 4 Nachkommastellen, maximal 10 Ziffern insgesamt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="10"/>
+			<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec10f7Type">
+		<xs:annotation>
+			<xs:documentation>Betragstyp mit 7 Nachkommastellen, maximal 10 Ziffern insgesamt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="10"/>
+			<xs:fractionDigits value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec9f6Type">
+		<xs:annotation>
+			<xs:documentation>Betragstyp mit 6 Nachkommastellen, maximal 9 Ziffern insgesamt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="9"/>
+			<xs:fractionDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec7f4Type">
+		<xs:annotation>
+			<xs:documentation>Betragstyp mit 4 Nachkommastellen, maximal 7 Ziffern insgesamt. Insbesondere für den Wert von Prozentzahlen.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="7"/>
+			<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dec19f16Type">
+		<xs:annotation>
+			<xs:documentation>Betragstyp mit 16 Nachkommastellen, maximal 19 Ziffern insgesamt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="19"/>
+			<xs:fractionDigits value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nonNegInt3Type">
+		<xs:annotation>
+			<xs:documentation>Nicht-negativer Ganzzahltyp mit maximal 3 Ziffern insgesamt. Insbesondere für Dauern in Jahren.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nonNegInt4Type">
+		<xs:annotation>
+			<xs:documentation>Nicht-negativer Ganzzahltyp mit maximal 4 Ziffern insgesamt. Insbesondere für Dauern in Monaten.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="valutaType">
+		<xs:annotation>
+			<xs:documentation>Valuta Datum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="offsetType">
+		<xs:annotation>
+			<xs:documentation>Nummer des ersten zurückzugebenden Datensatzes (Pagination, Verwendung in Kombination mit ei.common.Anzahl)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:posInt10Type"/>
+	</xs:simpleType>
+	<xs:simpleType name="weitereSaetzeVorhandenType">
+		<xs:annotation>
+			<xs:documentation>Flag, dass weitere Datensätze vorliegen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="anzahlType">
+		<xs:annotation>
+			<xs:documentation>Anzahl von etwas</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tagMonatType">
+		<xs:annotation>
+			<xs:documentation>Jahresunabhängiges Datum "TT.MM."</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="6"/>
+			<xs:pattern value="[0-3][0-9]\.[0-1][0-9]\."/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="jahrType">
+		<xs:annotation>
+			<xs:documentation>Jahr (ohne Zeitzone)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYear">
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="monatType">
+		<xs:annotation>
+			<xs:documentation>Monat MM (01 - 12)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string2Type">
+			<xs:pattern value="\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="datumType">
+		<xs:annotation>
+			<xs:documentation>Datum YYYY-MM-TT (ohne Zeitzone)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="jahrMonatType">
+		<xs:annotation>
+			<xs:documentation>Jahr-Monat YYYY-MM (ohne Zeitzone)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYearMonth">
+			<xs:pattern value="\d{4}-\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zeitType">
+		<xs:annotation>
+			<xs:documentation>Zeit hh:mm:ss (ohne Zeitzone)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:time">
+			<xs:pattern value="\d{2}:\d{2}:\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zeitstempelType">
+		<xs:annotation>
+			<xs:documentation>ein Zeitstempel YYYY-MM-TT hh:mm:ss[.nnn] (ohne Zeitzone)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,3})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="lfdNummerType">
+		<xs:annotation>
+			<xs:documentation>laufende Nummer eines Businessobjekts</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="fremdOrdnungsbegriffType">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Ordnungsbegriff für z.B. fremdverwaltete Bestände</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="jaNeinUnbekanntType">
+		<xs:annotation>
+			<xs:documentation>Allgemeiner Typ für ja, nein, unbekannt Attribute</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+			<xs:enumeration value="ja"/>
+			<xs:enumeration value="nein"/>
+			<xs:enumeration value="unbekannt"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="systemKennungType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ampelStatusEnum">
+		<xs:annotation>
+			<xs:documentation>Gibt eine Wertung in den Ampelfarben an</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+			<xs:enumeration value="rot">
+				<xs:annotation>
+					<xs:documentation>eine negative Wertung</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gelb">
+				<xs:annotation>
+					<xs:documentation>eine neutrale Wertung</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gruen">
+				<xs:annotation>
+					<xs:documentation>eine positive Wertung</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="unbekannt"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string1Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal einem Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string2Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal zwei Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string3Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal drei Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string4Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal vier Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string5Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal fünf Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string6Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal sechs Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string7Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal sieben Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string8Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal acht Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string9Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal neun Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string10Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal zehn Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string11Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal elf Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string12Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal zwölf Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string15Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 15 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string16Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 16 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string17Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 17 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string18Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 18 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string20Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 20 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string21Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 21 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="21"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string25Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 25 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string30Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 30 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string32Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 32 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string35Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 35 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string40Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 40 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string50Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 50 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string64Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 64 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string70Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 70 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string80Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 80 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string100Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 100 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string128Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 128 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="128"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string200Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 200 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string255Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 255 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string300Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 300 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="300"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string400Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 400 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="400"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string1024Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 1024 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string2000Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 2000 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string4000Type">
+		<xs:annotation>
+			<xs:documentation>String mit maximal 4000 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="versionsnummerType">
+		<xs:annotation>
+			<xs:documentation>Nummer einer Version eines Businessobjektes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt1Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 1 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt2Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 2 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt3Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 3 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt5Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 5 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt4Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 4 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt6Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 6 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt7Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 7 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt9Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 9 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt10Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 10 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt13Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 13 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="posInt20Type">
+		<xs:annotation>
+			<xs:documentation>Positiver Integer mit maximal 20 Ziffern</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="schlagwortType">
+		<xs:annotation>
+			<xs:documentation>Schlagworte zu einem Vorgang</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string255Type"/>
+	</xs:simpleType>
+	<xs:simpleType name="sortierkennzeichenType">
+		<xs:annotation>
+			<xs:documentation>Kennzeichen am Einzelelement welches für Sortierung verwendet wird (z.B. am Produktbaustein, Deckung etc.). Der Sortieralgorithmus ist vom Consumer zu implementieren.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string5Type">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="quartalType">
+		<xs:annotation>
+			<xs:documentation>Quartal des Jahres: 1-4, falls Jahr benötigt, dieses im separaten jahrType übergeben</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string1Type">
+			<xs:pattern value="[1-4]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="token1024Type">
+		<xs:annotation>
+			<xs:documentation>Hashwert/Token der Länge 1024</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string1024Type"/>
+	</xs:simpleType>
+	<xs:simpleType name="ouIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Der technische Identifier der Organisationseinheit (OU organizational unit)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string64Type"/>
+	</xs:simpleType>
+	<xs:simpleType name="usernameType">
+		<xs:annotation>
+			<xs:documentation>Ein nicht näher spezifizierter Benutzername (technisch oder auch persönlich)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string80Type">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="wertungType">
+		<xs:annotation>
+			<xs:documentation>Skala zur Bewertung von Sachverhalten: 1 schlecht, bis 5 gut, siehe Entries</xs:documentation>
+			<xs:appinfo>
+				<entries>
+					<entry>
+						<key>1</key>
+						<value>ungenügend</value>
+					</entry>
+					<entry>
+						<key>2</key>
+						<value>mangelhaft</value>
+					</entry>
+					<entry>
+						<key>3</key>
+						<value>erwartungskonform</value>
+					</entry>
+					<entry>
+						<key>4</key>
+						<value>gut</value>
+					</entry>
+					<entry>
+						<key>5</key>
+						<value>herausragend</value>
+					</entry>
+				</entries>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="kcom:posInt3Type"/>
+	</xs:simpleType>
+	<xs:simpleType name="beschreibungType">
+		<xs:annotation>
+			<xs:documentation>Beschreibung der Sache (Objekt, Vertrag, Deckung,..) statt expliziter Beschreibungsfelder wie nachweisartbeschreibung, beschreibungObjekt,...</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="kcom:string100Type"/>
+	</xs:simpleType>
+	<!-- ########## private types ############-->
+</xs:schema>

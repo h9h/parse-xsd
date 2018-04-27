@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+xsd beschreibt Informationen zu Applikationen
+Version: 1.0
+Autor: Michael Heinke
+Erstellt: 27 Mai 2014
+Approved by:
+__________________________________________
+Revision History:
+1.3 02/06/2016 - iuabi - DB Mapping
+1.2 15/10/2014 - iuabi - ADB, Beratungskomponente, BeratungsApp in applikationType aufgenommen, Postkorb-Eintraege konsolidiert
+1.1 27/08/2014 - iuabi - maxLength ergaenzt
+1.0 27/05/2014 - iuabi - XSD-Definition erstellt.
+__________________________________________
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:kapp="http://svi.de/kdf/ei/application/v1" targetNamespace="http://svi.de/kdf/ei/application/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- ########## KDF Fragmente ############-->
+	<xs:element name="bestandsfuehrendeApplikation" type="kapp:bestandsfuehrendeApplikationType"/>
+	<xs:element name="applikation" type="kapp:applikationType"/>
+	<!-- ########## public types ############-->
+	<xs:simpleType name="bestandsfuehrendeApplikationType">
+		<xs:annotation>
+			<xs:documentation>Der Name der Applikation, die für das Businessobjekt primär verantwortlich ist</xs:documentation>
+			<xs:appinfo>
+				<xs:dbName>bestandsfAppType</xs:dbName>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:enumeration value="ICIS"/>
+			<xs:enumeration value="COR"/>
+			<xs:enumeration value="unbekannt"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="applikationType">
+		<xs:annotation>
+			<xs:documentation>Der Liste der Applikationen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:enumeration value="ADB"/>
+			<xs:enumeration value="BeratungsApp"/>
+			<xs:enumeration value="Beratungskomponente"/>
+			<xs:enumeration value="BI-Publisher"/>
+			<xs:enumeration value="BIRT"/>
+			<xs:enumeration value="BISSPRESS"/>
+			<xs:enumeration value="BISSPRODUKTSYSTEM">
+				<xs:annotation>
+					<xs:appinfo>
+						<xs:dbName>applikation_BissProduktSys</xs:dbName>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BPE"/>
+			<xs:enumeration value="Cognos"/>
+			<xs:enumeration value="ConsPrep"/>
+			<xs:enumeration value="ControlExpert"/>
+			<xs:enumeration value="COR"/>
+			<xs:enumeration value="COR-RBM"/>
+			<xs:enumeration value="cuContract"/>
+			<xs:enumeration value="DBA-Info"/>
+			<xs:enumeration value="Deka"/>
+			<xs:enumeration value="Dokumenten_Archiv_System">
+				<xs:annotation>
+					<xs:appinfo>
+						<xs:dbName>applikation_Dok_Archiv_Sys</xs:dbName>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DVS"/>
+			<xs:enumeration value="DWH"/>
+			<xs:enumeration value="ESW_Adressware"/>
+			<xs:enumeration value="eVB"/>
+			<xs:enumeration value="FAX_MailServer"/>
+			<xs:enumeration value="FileNet"/>
+			<xs:enumeration value="GdV_Schadennetz"/>
+			<xs:enumeration value="GdV_VOEV"/>
+			<xs:enumeration value="Genworth"/>
+			<xs:enumeration value="HeLaBaInvest"/>
+			<xs:enumeration value="Hexpertise"/>
+			<xs:enumeration value="HIS"/>
+			<xs:enumeration value="HSH_Nordbank"/>
+			<xs:enumeration value="ICIS"/>
+			<xs:enumeration value="IDM"/>
+			<xs:enumeration value="info4c"/>
+			<xs:enumeration value="INFOSCORE"/>
+			<xs:enumeration value="INPLAN"/>
+			<xs:enumeration value="InterCard"/>
+			<xs:enumeration value="LDAP"/>
+			<xs:enumeration value="LotusNotes"/>
+			<xs:enumeration value="OCR_Fontcollect"/>
+			<xs:enumeration value="OSPlus"/>
+			<xs:enumeration value="Papyrus"/>
+			<xs:enumeration value="PapyrusOnline"/>
+			<xs:enumeration value="PaymentManagement">
+				<xs:annotation>
+					<xs:appinfo>
+						<xs:dbName>applikation_PaymentMgmt</xs:dbName>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Perfidia"/>
+			<xs:enumeration value="PhinAMV"/>
+			<xs:enumeration value="Postkorb_Backend"/>
+			<xs:enumeration value="Postkorb_Frontend">
+				<xs:annotation>
+					<xs:appinfo>
+						<xs:dbName>applikation_Postkorb_Front</xs:dbName>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Primion"/>
+			<xs:enumeration value="SAP_CML"/>
+			<xs:enumeration value="SAP_EC_CS"/>
+			<xs:enumeration value="SAP_FI"/>
+			<xs:enumeration value="SAP_FI_CO_AA"/>
+			<xs:enumeration value="SAP_FS-CD"/>
+			<xs:enumeration value="SAP_FS-RI"/>
+			<xs:enumeration value="SAP_HCM"/>
+			<xs:enumeration value="SAP_ICM"/>
+			<xs:enumeration value="SAP_MM"/>
+			<xs:enumeration value="SAP_PS"/>
+			<xs:enumeration value="SAP_RE-FX"/>
+			<xs:enumeration value="SAP_SolutionManager">
+				<xs:annotation>
+					<xs:appinfo>
+						<xs:dbName>applikation_SAP_SolutionMgr</xs:dbName>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPM_VKB"/>
+			<xs:enumeration value="SVIS"/>
+			<xs:enumeration value="SVProvis"/>
+			<xs:enumeration value="TITZE"/>
+			<xs:enumeration value="Unireport"/>
+			<xs:enumeration value="VDS_Meteo-Info"/>
+			<xs:enumeration value="VDV"/>
+			<xs:enumeration value="VIM"/>
+			<xs:enumeration value="VPMS"/>
+			<xs:enumeration value="ZUERS"/>
+			<xs:enumeration value="unbekannt"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ########## private types ############-->
+</xs:schema>

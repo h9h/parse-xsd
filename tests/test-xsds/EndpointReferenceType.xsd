@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" targetNamespace="http://schemas.xmlsoap.org/ws/2004/08/addressing" elementFormDefault="qualified" blockDefault="#all">
+    <!-- //////////////////// WS-Addressing //////////////////// -->
+    <!-- Endpoint reference -->
+    <xs:element name="EndpointReference" type="wsa:EndpointReferenceType"/>
+    <xs:complexType name="EndpointReferenceType">
+        <xs:sequence>
+            <xs:element name="Address" type="xs:string"/>
+            <xs:element name="ReferenceProperties" type="xs:string" minOccurs="0"/>
+            <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        If "Policy" elements from namespace "http://schemas.xmlsoap.org/ws/2002/12/policy#policy" are used, they must appear first (before any extensibility elements).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:any>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:complexType>
+</xs:schema>

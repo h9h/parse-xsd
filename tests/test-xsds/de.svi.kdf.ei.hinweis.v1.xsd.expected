@@ -1,0 +1,72 @@
+{
+  "element": [
+    {
+      "annotation": {
+        "documentation": "Anmerkung eine zusätzliche Bemerkung zu einem Sachverhalt"
+      },
+      "name": "anmerkung",
+      "type": "khin:string4000Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Das Aktenzeichen ist die Signatur einer Akte"
+      },
+      "name": "aktenzeichen",
+      "type": "khin:string200Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Betreff ist eine Kurzfassung des Inhaltes der Nachricht beziehungsweise der Thematik"
+      },
+      "name": "betreff",
+      "type": "khin:string72Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Kommentar"
+      },
+      "name": "kommentar",
+      "type": "khin:string2000Type"
+    }
+  ],
+  "simpleType": [
+    {
+      "restriction": {
+        "maxLength": "2000",
+        "base": "xs:string"
+      },
+      "name": "string2000Type"
+    },
+    {
+      "restriction": {
+        "maxLength": "200",
+        "base": "xs:string"
+      },
+      "name": "string200Type"
+    },
+    {
+      "restriction": {
+        "maxLength": "72",
+        "base": "xs:string"
+      },
+      "name": "string72Type"
+    },
+    {
+      "restriction": {
+        "maxLength": "4000",
+        "base": "xs:string"
+      },
+      "name": "string4000Type"
+    }
+  ],
+  "meta": {
+    "annotation": {
+      "documentation": "XSD Beschreibt die Typen zu hinweisen."
+    },
+    "xmlns:khin": "http://svi.de/kdf/ei/hinweis/v1",
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "targetNamespace": "http://svi.de/kdf/ei/hinweis/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified"
+  }
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+xsd beschreibt die Attribute die als hinweise genutzt werden können
+Autor: Susanne Weber
+Erstellt: 24 Juni 2015
+Approved by:
+__________________________________________
+Revision History:
+1.1 - 2015/10/29 - iuabi - Korrektur Typ string4000
+1.0 - 2015/06/24 - iuwbs - Neuerstellung
+-->
+<xs:schema xmlns:khin="http://svi.de/kdf/ei/hinweis/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://svi.de/kdf/ei/hinweis/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>XSD Beschreibt die Typen zu hinweisen.</xs:documentation>
+	</xs:annotation>
+	<!-- ########## KDF Fragmente ############-->
+	<xs:element name="anmerkung" type="khin:string4000Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">Anmerkung eine zusätzliche Bemerkung zu einem Sachverhalt</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="aktenzeichen" type="khin:string200Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">Das Aktenzeichen ist die Signatur einer Akte</xs:documentation>
+			<!--achtung: bereits in prozess drin. prüfen und dort raus, oder hier raus.-->
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="betreff" type="khin:string72Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">Betreff ist eine Kurzfassung des Inhaltes der Nachricht beziehungsweise der Thematik </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="kommentar" type="khin:string2000Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">Kommentar</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- private Types -->
+	<xs:simpleType name="string2000Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string200Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string72Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="72"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string4000Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

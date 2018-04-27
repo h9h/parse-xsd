@@ -1,0 +1,33 @@
+{
+  "element": {
+    "annotation": {
+      "documentation": "Im Falle eines Kontaktes mit CrossUpSelling-Chance die angesprochene Chance"
+    },
+    "name": "angesprocheneChance",
+    "type": "kbrtg:angesprocheneChanceType"
+  },
+  "simpleType": {
+    "annotation": {
+      "documentation": "Im Falle eines Kontaktes mit CrossUpSelling-Chance die angesprochene Chance"
+    },
+    "restriction": {
+      "base": "kcom:string200Type"
+    },
+    "name": "angesprocheneChanceType"
+  },
+  "meta": {
+    "annotation": {
+      "documentation": "Allgemeine Attribute in der Beratung"
+    },
+    "import": {
+      "namespace": "http://svi.de/kdf/ei/common/v1",
+      "schemaLocation": "de.svi.kdf.ei.common.xsd"
+    },
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:kcom": "http://svi.de/kdf/ei/common/v1",
+    "xmlns:kbrtg": "http://svi.de/kdf/beratung/v1",
+    "targetNamespace": "http://svi.de/kdf/beratung/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified"
+  }
+}

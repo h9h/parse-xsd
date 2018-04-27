@@ -1,0 +1,157 @@
+{
+  "element": [
+    {
+      "name": "bestandsfuehrendeApplikation",
+      "type": "kapp:bestandsfuehrendeApplikationType"
+    },
+    {
+      "name": "applikation",
+      "type": "kapp:applikationType"
+    }
+  ],
+  "simpleType": [
+    {
+      "annotation": {
+        "documentation": "Der Name der Applikation, die für das Businessobjekt primär verantwortlich ist",
+        "appinfo": {
+          "dbName": "bestandsfAppType"
+        }
+      },
+      "restriction": {
+        "maxLength": "40",
+        "enumeration": [
+          "ICIS",
+          "COR",
+          "unbekannt"
+        ],
+        "base": "xs:string"
+      },
+      "name": "bestandsfuehrendeApplikationType"
+    },
+    {
+      "annotation": {
+        "documentation": "Der Liste der Applikationen"
+      },
+      "restriction": {
+        "maxLength": "40",
+        "enumeration": [
+          "ADB",
+          "BeratungsApp",
+          "Beratungskomponente",
+          "BI-Publisher",
+          "BIRT",
+          "BISSPRESS",
+          {
+            "annotation": {
+              "appinfo": {
+                "dbName": "applikation_BissProduktSys"
+              }
+            },
+            "value": "BISSPRODUKTSYSTEM"
+          },
+          "BPE",
+          "Cognos",
+          "ConsPrep",
+          "ControlExpert",
+          "COR",
+          "COR-RBM",
+          "cuContract",
+          "DBA-Info",
+          "Deka",
+          {
+            "annotation": {
+              "appinfo": {
+                "dbName": "applikation_Dok_Archiv_Sys"
+              }
+            },
+            "value": "Dokumenten_Archiv_System"
+          },
+          "DVS",
+          "DWH",
+          "ESW_Adressware",
+          "eVB",
+          "FAX_MailServer",
+          "FileNet",
+          "GdV_Schadennetz",
+          "GdV_VOEV",
+          "Genworth",
+          "HeLaBaInvest",
+          "Hexpertise",
+          "HIS",
+          "HSH_Nordbank",
+          "ICIS",
+          "IDM",
+          "info4c",
+          "INFOSCORE",
+          "INPLAN",
+          "InterCard",
+          "LDAP",
+          "LotusNotes",
+          "OCR_Fontcollect",
+          "OSPlus",
+          "Papyrus",
+          "PapyrusOnline",
+          {
+            "annotation": {
+              "appinfo": {
+                "dbName": "applikation_PaymentMgmt"
+              }
+            },
+            "value": "PaymentManagement"
+          },
+          "Perfidia",
+          "PhinAMV",
+          "Postkorb_Backend",
+          {
+            "annotation": {
+              "appinfo": {
+                "dbName": "applikation_Postkorb_Front"
+              }
+            },
+            "value": "Postkorb_Frontend"
+          },
+          "Primion",
+          "SAP_CML",
+          "SAP_EC_CS",
+          "SAP_FI",
+          "SAP_FI_CO_AA",
+          "SAP_FS-CD",
+          "SAP_FS-RI",
+          "SAP_HCM",
+          "SAP_ICM",
+          "SAP_MM",
+          "SAP_PS",
+          "SAP_RE-FX",
+          {
+            "annotation": {
+              "appinfo": {
+                "dbName": "applikation_SAP_SolutionMgr"
+              }
+            },
+            "value": "SAP_SolutionManager"
+          },
+          "SPM_VKB",
+          "SVIS",
+          "SVProvis",
+          "TITZE",
+          "Unireport",
+          "VDS_Meteo-Info",
+          "VDV",
+          "VIM",
+          "VPMS",
+          "ZUERS",
+          "unbekannt"
+        ],
+        "base": "xs:string"
+      },
+      "name": "applikationType"
+    }
+  ],
+  "meta": {
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:kapp": "http://svi.de/kdf/ei/application/v1",
+    "targetNamespace": "http://svi.de/kdf/ei/application/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified"
+  }
+}

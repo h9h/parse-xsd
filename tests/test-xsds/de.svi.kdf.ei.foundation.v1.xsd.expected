@@ -1,0 +1,523 @@
+{
+  "simpleType": [
+    {
+      "annotation": {
+        "documentation": "Die Id, die den Nachrichtenaustausch (Request und Response) eindeutig identifiziert. Sollte eine durch den Sender erzeugte UUID sein. Beispiel: \"M-196AC731-A952-6BA0-D923-AFC7B75ED39C1\""
+      },
+      "restriction": {
+        "minLength": "37",
+        "maxLength": "66",
+        "pattern": "M-[0-9A-Za-z][\\-0-9A-Za-z]{35,64}",
+        "base": "xs:string"
+      },
+      "name": "messageIdType"
+    },
+    {
+      "annotation": {
+        "documentation": "Die ID des Business Processes (bzw. der Instanz davon), um Prozessverfolgung und Business Activity Monitoring (BAM)\tzu ermöglichen. (Semantisch entspricht dies der SOABP\tcorrelation-id.)"
+      },
+      "restriction": {
+        "minLength": "37",
+        "maxLength": "66",
+        "pattern": "P-[0-9A-Za-z][\\-0-9A-Za-z]{35,64}",
+        "base": "xs:string"
+      },
+      "name": "processInstanceIdType"
+    },
+    {
+      "annotation": {
+        "documentation": "UTC -timestamp Beispiel: \"2010-12-31T23:45:58.123Z\" - **Beachte das \"Z\"**"
+      },
+      "restriction": {
+        "length": "24",
+        "pattern": "\\d{4}-[0-1]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d.\\d{3}Z",
+        "base": "xs:string"
+      },
+      "name": "timestampUTCType"
+    },
+    {
+      "annotation": {
+        "documentation": "Der Offset fuer den Timestamp"
+      },
+      "restriction": {
+        "minInclusive": "0",
+        "base": "xs:integer"
+      },
+      "name": "timestampOffsetType"
+    },
+    {
+      "annotation": {
+        "documentation": "Technisch erforderlicher Kontext, der ggf im Falle des Message Exchange Patterns Request/Callback erforderlich ist."
+      },
+      "restriction": {
+        "minLength": "1",
+        "maxLength": "20000",
+        "base": "xs:string"
+      },
+      "name": "replyContextType"
+    },
+    {
+      "annotation": {
+        "documentation": "Der voll-qualifizierte Name des Senders. **Beachte:** Das RegEx-Pattern entspricht dem ersten Teil des Pattern von\tTCRoutingInfo aus CEISeR (Hinweis: Pattern getestet mit SoapUI 4.0.1 und http://myregexp.com/signedJar.html) Beispiel: \"de.svi.architecture.PingConsumer:soapui:pingConsuming\""
+      },
+      "restriction": {
+        "whiteSpace": "collapse",
+        "minLength": "5",
+        "maxLength": "255",
+        "pattern": "[a-z][\\.a-z]{0,63}([A-Za-z][\\-a-zA-Z_0-9]{0,15}):([A-Za-z][\\-a-zA-Z_0-9]{0,255}):([A-Za-z][\\-a-zA-Z_0-9]{0,255})",
+        "base": "xs:string"
+      },
+      "name": "senderFQNType"
+    },
+    {
+      "annotation": {
+        "appinfo": {
+          "use": "private"
+        },
+        "documentation": "String mit 1 bis 2000 Zeichen"
+      },
+      "restriction": {
+        "minLength": "1",
+        "maxLength": "2000",
+        "base": "xs:string"
+      },
+      "name": "string2000Type"
+    }
+  ],
+  "element": [
+    {
+      "name": "messageHeader",
+      "type": "tns:messageHeaderType"
+    },
+    {
+      "annotation": {
+        "documentation": "Standard Response für leere Antworten"
+      },
+      "name": "emptyResponse",
+      "type": "tns:emptyType"
+    },
+    {
+      "annotation": {
+        "documentation": "Standard Request für leere Parameter"
+      },
+      "name": "emptyRequest",
+      "type": "tns:emptyType"
+    }
+  ],
+  "complexType": [
+    {
+      "annotation": {
+        "documentation": "Der technische cross-funktionale Kontext, der in jedem MessageCall zu transportieren ist."
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Entspricht dem UsingPort fully qualified aus\tCEISeR"
+            },
+            "name": "senderFQN",
+            "type": "tns:senderFQNType",
+            "nillable": "false",
+            "minOccurs": "1",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Die Id, die den Nachrichtenaustausch (Request und Response) eindeutig identifiziert. Sollte eine durch den Sender erzeugte UUID sein. Beispiel: \"M-196AC731-A952-6BA0-D923-AFC7B75ED39C1\""
+            },
+            "name": "messageId",
+            "type": "tns:messageIdType",
+            "minOccurs": "1",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Im asynchronen Fall muss das \"messageId\"-Attribut des auslösenden Nachrichtenaustausch\tin das Attribut \"relatesToMessageId\" der Callback- bzw. asynchronen Antwort-Nachricht kopiert werden (durch den Provider!). Beispiel: A.) Request-Message : \"M-196AC731-A952-6BA0-D923-AFC7B75ED39C1\" relatesToMessageId : EMPTY B.) Callback-Message : \"M-767AC896-F867-8DE0-D899-FFF3B75FF99FF\" relatesToMessageId : \"M-196AC731-A952-6BA0-D923-AFC7B75ED39C1\""
+            },
+            "name": "relatesToMessageId",
+            "type": "tns:messageIdType",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Der Zeitstempel der Nachricht beim Sender (der Sender-Maschine) in UTC inkl. Millisekunden."
+            },
+            "name": "senderCurrentTimestampUTC",
+            "type": "tns:timestampUTCType",
+            "minOccurs": "1",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Der Offset in Millisekunden, der auf den \"senderCurrentTimestampUTC\" addiert wird: Das Ergebnis defiiert den spätesten Zeitpunkt\tzu dem die Nachricht fuer den Sender noch\tinteressant ist (in seinem Zeitsystem). Middleware-Komponenten dürfen die Nachricht nach dieser Zeit verwerfen. Der Wert \"0\"\tdefiniert eine unbeschränkte Zeitspanne. Dieser Wert darf für\tsynchrone Calls nicht verwendet werden. Middleware Komponenten dürfen Nachrichten mit dem Wert \"0\" bei synchronen Aufrufen verwerfen!"
+            },
+            "name": "expectedResponseTimeInMillis",
+            "type": "tns:timestampOffsetType",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Die ID der Instanz des Prozesses von der Kundenseite der Applikation. Beispiel: \"P-196AC731-A952-5BA0-D923-AFC7B75ED49C43\""
+            },
+            "name": "processInstanceId",
+            "type": "tns:processInstanceIdType",
+            "nillable": "false",
+            "minOccurs": "1",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Falls aus einem Prozess ein Kind-Prozess gestartet wird, so ist hier die ursprüngliche ID festzuhalten."
+            },
+            "name": "parentProcessInstanceId",
+            "type": "tns:processInstanceIdType",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Technisch erforderlicher Kontext, der ggf im Falle des Message Exchange Patterns Request/Callback erforderlich\tist."
+            },
+            "name": "replyContext",
+            "type": "tns:replyContextType",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Eine Liste von Eigenschaften, die ggf. temporär als Workaround benötigt werden. **Nur in ABSPRACHE mit dem Stab EA\tzu verwenden.**"
+            },
+            "name": "property",
+            "type": "tns:propertyListType",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          }
+        ]
+      },
+      "name": "messageHeaderType"
+    },
+    {
+      "annotation": {
+        "documentation": "Abstrakter Typ um als Basis für abgeleitete konkrete RequestTypen zu dienen.\tDiese haben ja immer die Form <messageHeader/> <payload/> Nutzungsbeispiel:\tDefinition der Payload: <xs:complexType name=\"specificPayloadType\"> <xs:sequence> <xs:element name=\"element1\" type=\"xs:string\" /> <xs:element name=\"element2\" type=\"xs:string\" /> </xs:sequence> </xs:complexType> und Nutzung im abgeleiteten Request Type: <xs:complexType name=\"specificRequestType\" > <xs:complexContent> <xs:extension base=\"tns:commonMessageType\"> <xs:sequence> <xs:element name=\"payload\" type=\"tns:specificPayloadType\" /> </xs:sequence> </xs:extension> </xs:complexContent> </xs:complexType>"
+      },
+      "sequence": {
+        "element": {
+          "name": "messageHeader",
+          "type": "tns:messageHeaderType"
+        }
+      },
+      "name": "commonMessageType",
+      "abstract": "true"
+    },
+    {
+      "annotation": {
+        "documentation": "Liste von Schluessel/Wert-Paaren fuer temporäre Workarounds"
+      },
+      "sequence": {
+        "element": {
+          "name": "propertyListItem",
+          "type": "tns:propertyListItemType",
+          "minOccurs": "0",
+          "maxOccurs": "unbounded"
+        }
+      },
+      "name": "propertyListType"
+    },
+    {
+      "annotation": {
+        "documentation": "Ein Schlüssel/Wert Paar"
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Der Schlüssel/Name der temporären Workaround-Eigenschaft."
+            },
+            "name": "key",
+            "type": "xs:string"
+          },
+          {
+            "annotation": {
+              "documentation": "Der zugehörige Wert der temporären Workaround-Eigenschaft."
+            },
+            "name": "value",
+            "type": "xs:string"
+          }
+        ]
+      },
+      "name": "propertyListItemType"
+    },
+    {
+      "annotation": {
+        "documentation": "Zentraler Basistyp für Fehler, der die\tgrundsätzlichen Eigenschaften von Fehlern festlegt."
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Der Nachrichtenkopf, der in jeder Nachricht transportiert wird"
+            },
+            "name": "messageHeader",
+            "type": "tns:messageHeaderType"
+          },
+          {
+            "annotation": {
+              "documentation": "Die fachliche Nutzlast einer Nachricht"
+            },
+            "complexType": {
+              "sequence": {
+                "element": [
+                  {
+                    "simpleType": {
+                      "annotation": {
+                        "documentation": "Aufzählungstyp für den Fehlertyp."
+                      },
+                      "restriction": {
+                        "enumeration": [
+                          {
+                            "annotation": {
+                              "documentation": "Es ist ein fachlicher Fehler aufgetreten."
+                            },
+                            "value": "BusinessFault"
+                          },
+                          {
+                            "annotation": {
+                              "documentation": "Es ist ein technischer Fehler aufgetreten."
+                            },
+                            "value": "FatalFault"
+                          }
+                        ],
+                        "base": "xs:string"
+                      }
+                    },
+                    "name": "faultCategory"
+                  },
+                  {
+                    "annotation": {
+                      "documentation": "Die Dateildaten zu einem Fehler"
+                    },
+                    "name": "errorDetail",
+                    "type": "tns:errorDetailType"
+                  }
+                ]
+              }
+            },
+            "name": "payload"
+          }
+        ]
+      },
+      "name": "faultDetailType"
+    },
+    {
+      "annotation": {
+        "documentation": "Die Dateildaten zu einem Fehler"
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Ein eindeutiger Identifikator, der es ermöglicht, mit dieser Fehlermeldung programmgesteuert umzugehen. Die Eindeutigkeit ist nur im Zusammenspiel mit dem SenderFQN gegeben."
+            },
+            "name": "errorCode",
+            "type": "xs:string"
+          },
+          {
+            "annotation": {
+              "documentation": "Bezeichner/Typ für den error"
+            },
+            "name": "errorName",
+            "type": "xs:string"
+          },
+          {
+            "annotation": {
+              "documentation": "Eine detailierte Fehlermeldung"
+            },
+            "name": "errorMessage",
+            "type": "xs:string",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Zeitpunkt, zu dem der Fehler aufgetreten ist."
+            },
+            "name": "reportingTime",
+            "type": "xs:string",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Identifikator für den auslösenden Geschäftsprozess oder den auslösenden Service."
+            },
+            "name": "correlationId",
+            "type": "xs:string",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Identifikator, der es ermöglicht, die detailierte\tFehlermeldung im Logfile der Serviceimplementierung aufzufinden."
+            },
+            "name": "serverStackTraceId",
+            "type": "xs:string",
+            "minOccurs": "0"
+          },
+          {
+            "annotation": {
+              "documentation": "Ursprüngliche Fehlermeldung, die zum Auslösen dieses Faults geführt hat."
+            },
+            "name": "originCause",
+            "type": "xs:string",
+            "minOccurs": "0",
+            "maxOccurs": "1"
+          },
+          {
+            "annotation": {
+              "documentation": "Detailierte technische Fehlermeldung aus der Serviceimplementierung."
+            },
+            "name": "serverStackTrace",
+            "type": "xs:string",
+            "minOccurs": "0"
+          }
+        ]
+      },
+      "name": "errorDetailType"
+    },
+    {
+      "annotation": {
+        "documentation": "Standard RequestType der checkAlive Operation"
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Der Nachrichtenkopf, der in jeder Nachricht transportiert wird"
+            },
+            "reference": "tns:messageHeader"
+          },
+          {
+            "annotation": {
+              "documentation": "Keine Nutzlast"
+            },
+            "name": "payload",
+            "type": "tns:emptyType"
+          }
+        ]
+      },
+      "name": "checkAliveMessageType"
+    },
+    {
+      "annotation": {
+        "documentation": "Standard ResponseType der checkAlive Operation"
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Der Nachrichtenkopf, der in jeder Nachricht transportiert wird"
+            },
+            "reference": "tns:messageHeader"
+          },
+          {
+            "annotation": {
+              "documentation": "Keine Nutzlast"
+            },
+            "name": "payload",
+            "type": "tns:emptyType"
+          }
+        ]
+      },
+      "name": "checkAliveMessageRespType"
+    },
+    {
+      "annotation": {
+        "documentation": "Ein leeres Element"
+      },
+      "sequence": "",
+      "name": "emptyType"
+    },
+    {
+      "annotation": {
+        "documentation": "Standard ResponseType aller asynchronen und fireAndForget Operationen"
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Der Nachrichtenkopf, der in jeder Nachricht transportiert wird"
+            },
+            "reference": "tns:messageHeader"
+          },
+          {
+            "annotation": {
+              "documentation": "Keine Nutzlast"
+            },
+            "name": "payload",
+            "type": "tns:emptyType"
+          }
+        ]
+      },
+      "name": "acknowledgeRespType"
+    },
+    {
+      "annotation": {
+        "documentation": "Typ um einen Fault eines synchronen Services für einen asynchronen Mep-gemappten Service im Body zu transportieren"
+      },
+      "sequence": {
+        "element": [
+          {
+            "annotation": {
+              "documentation": "Der Nachrichtenkopf, der in jeder Nachricht transportiert wird"
+            },
+            "reference": "tns:messageHeader"
+          },
+          {
+            "annotation": {
+              "documentation": "Der Fault, der vom synchronen Service generiert wurde"
+            },
+            "complexType": {
+              "sequence": {
+                "element": [
+                  {
+                    "name": "faultcode",
+                    "type": "tns:string2000Type"
+                  },
+                  {
+                    "name": "faultstring",
+                    "type": "tns:string2000Type"
+                  },
+                  {
+                    "name": "faultactor",
+                    "type": "tns:string2000Type",
+                    "minOccurs": "0"
+                  },
+                  {
+                    "name": "faultDetail",
+                    "type": "tns:faultDetailType",
+                    "minOccurs": "0"
+                  }
+                ]
+              }
+            },
+            "name": "payload"
+          }
+        ]
+      },
+      "name": "mepMappingFaultToBodyType"
+    }
+  ],
+  "meta": {
+    "annotation": {
+      "documentation": "Enthält den Typ des MessageHeaders, welcher in jedem Servicecall mitgereicht wird und Basis für Verfolgung, Logging etc ist. Desweiteren die Definition von Standard Fault-Typen."
+    },
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:tns": "http://svi.de/kdf/ei/foundation/v1",
+    "targetNamespace": "http://svi.de/kdf/ei/foundation/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified",
+    "version": "1.0"
+  }
+}

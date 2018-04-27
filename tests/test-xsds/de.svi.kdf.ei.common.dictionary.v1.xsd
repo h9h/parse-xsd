@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Version	Datum    		Name                          		Bemerkung
+#####	######			##################  		###############################
+1.1		15.10.2015	Michael Heinke  				maxLength des Schlüssels auf 100 geändert
+1.0		09.07.2015	Michael Heinke  				Neuanlage
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:kcdic="http://svi.de/kdf/ei/common/dictionary/v1" targetNamespace="http://svi.de/kdf/ei/common/dictionary/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Enthaelt die Typdefinitionen fuer ein Dictionary</xs:documentation>
+	</xs:annotation>
+	<xs:element name="dictionary" type="kcdic:dictionaryType"/>
+	<xs:complexType name="dictionaryType">
+		<xs:annotation>
+			<xs:documentation>Definiert ein Dictionary</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="entry" type="kcdic:entryType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="entryType">
+		<xs:annotation>
+			<xs:documentation>Datentyp fuer ein Key-Value-Paar</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="key" type="kcdic:keyType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="value" type="kcdic:valueType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="valueType">
+		<xs:annotation>
+			<xs:documentation>Datentyp fuer den Wert zu einem Schluessel</xs:documentation>
+			<xs:appinfo>
+				<use>private</use>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="keyType">
+		<xs:annotation>
+			<xs:documentation>Datentyp fuer den eindeutiger Schluessel in einem Dictionary.</xs:documentation>
+			<xs:appinfo>
+				<use>private</use>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

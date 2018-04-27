@@ -1,0 +1,82 @@
+{
+  "element": {
+    "name": "dictionary",
+    "type": "kcdic:dictionaryType"
+  },
+  "complexType": [
+    {
+      "annotation": {
+        "documentation": "Definiert ein Dictionary"
+      },
+      "sequence": {
+        "element": {
+          "name": "entry",
+          "type": "kcdic:entryType",
+          "minOccurs": "0",
+          "maxOccurs": "unbounded"
+        }
+      },
+      "name": "dictionaryType"
+    },
+    {
+      "annotation": {
+        "documentation": "Datentyp fuer ein Key-Value-Paar"
+      },
+      "sequence": {
+        "element": [
+          {
+            "name": "key",
+            "type": "kcdic:keyType",
+            "minOccurs": "1",
+            "maxOccurs": "1"
+          },
+          {
+            "name": "value",
+            "type": "kcdic:valueType",
+            "minOccurs": "1",
+            "maxOccurs": "1"
+          }
+        ]
+      },
+      "name": "entryType"
+    }
+  ],
+  "simpleType": [
+    {
+      "annotation": {
+        "documentation": "Datentyp fuer den Wert zu einem Schluessel",
+        "appinfo": {
+          "use": "private"
+        }
+      },
+      "restriction": {
+        "maxLength": "500",
+        "base": "xs:string"
+      },
+      "name": "valueType"
+    },
+    {
+      "annotation": {
+        "documentation": "Datentyp fuer den eindeutiger Schluessel in einem Dictionary.",
+        "appinfo": {
+          "use": "private"
+        }
+      },
+      "restriction": {
+        "maxLength": "100",
+        "base": "xs:string"
+      },
+      "name": "keyType"
+    }
+  ],
+  "meta": {
+    "annotation": {
+      "documentation": "Enthaelt die Typdefinitionen fuer ein Dictionary"
+    },
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:kcdic": "http://svi.de/kdf/ei/common/dictionary/v1",
+    "targetNamespace": "http://svi.de/kdf/ei/common/dictionary/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified"
+  }
+}

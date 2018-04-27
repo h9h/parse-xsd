@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Version  Datum           Name                                          Bemerkung
+#######  ##########  ############################  ###############################
+  1.0       04.12.2015    Heinke                                         Neuanlage - ersetzt ei.validierung
+-->
+<xs:schema xmlns:kecm="http://svi.de/kdf/ei/common/meldung/v1" xmlns:kcom="http://svi.de/kdf/ei/common/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://svi.de/kdf/ei/common/meldung/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://svi.de/kdf/ei/common/v1" schemaLocation="de.svi.kdf.ei.common.xsd"/>
+	<xs:element name="meldungListe" type="kecm:meldungListeType"/>
+	<xs:complexType name="meldungListeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Dieser Typ enthält eine Liste von Meldungen, z.B. aus einem Validierungsservice oder einer Listenverarbeitung.
+				Eine leere Liste kann interpretiert werden als *Verarbeitung erfolgreich*.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="meldungItem" type="kecm:meldungType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="meldungType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Der Typ Meldung soll für die Ausgabe einer einzelnen Meldung verwendet werden.
+				severity - Gewichtigkeit der Meldung
+				code - Service-spezifischer Code fuer die Meldung
+				meldungText - Nutzerfreundliche Aufbereitung der Meldung
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="severity" type="kecm:severityEnum"/>
+			<xs:element name="code" type="kcom:string12Type"/>
+			<xs:element name="meldungText" type="kcom:string255Type"/>
+			<xs:element name="referenz" type="kcom:string70Type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="severityEnum">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+			<xs:enumeration value="HINWEIS"/>
+			<xs:enumeration value="WARNUNG"/>
+			<xs:enumeration value="FEHLER"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

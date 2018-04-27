@@ -1,0 +1,75 @@
+{
+  "element": {
+    "name": "meldungListe",
+    "type": "kecm:meldungListeType"
+  },
+  "complexType": [
+    {
+      "annotation": {
+        "documentation": "Dieser Typ enthält eine Liste von Meldungen, z.B. aus einem Validierungsservice oder einer Listenverarbeitung. Eine leere Liste kann interpretiert werden als *Verarbeitung erfolgreich*."
+      },
+      "sequence": {
+        "element": {
+          "name": "meldungItem",
+          "type": "kecm:meldungType",
+          "minOccurs": "0",
+          "maxOccurs": "unbounded"
+        }
+      },
+      "name": "meldungListeType"
+    },
+    {
+      "annotation": {
+        "documentation": "Der Typ Meldung soll für die Ausgabe einer einzelnen Meldung verwendet werden. severity - Gewichtigkeit der Meldung code - Service-spezifischer Code fuer die Meldung meldungText - Nutzerfreundliche Aufbereitung der Meldung"
+      },
+      "sequence": {
+        "element": [
+          {
+            "name": "severity",
+            "type": "kecm:severityEnum"
+          },
+          {
+            "name": "code",
+            "type": "kcom:string12Type"
+          },
+          {
+            "name": "meldungText",
+            "type": "kcom:string255Type"
+          },
+          {
+            "name": "referenz",
+            "type": "kcom:string70Type",
+            "minOccurs": "0",
+            "maxOccurs": "unbounded"
+          }
+        ]
+      },
+      "name": "meldungType"
+    }
+  ],
+  "simpleType": {
+    "restriction": {
+      "maxLength": "7",
+      "enumeration": [
+        "HINWEIS",
+        "WARNUNG",
+        "FEHLER"
+      ],
+      "base": "xs:string"
+    },
+    "name": "severityEnum"
+  },
+  "meta": {
+    "import": {
+      "namespace": "http://svi.de/kdf/ei/common/v1",
+      "schemaLocation": "de.svi.kdf.ei.common.xsd"
+    },
+    "xmlns:kecm": "http://svi.de/kdf/ei/common/meldung/v1",
+    "xmlns:kcom": "http://svi.de/kdf/ei/common/v1",
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "targetNamespace": "http://svi.de/kdf/ei/common/meldung/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified",
+    "version": "1.0"
+  }
+}

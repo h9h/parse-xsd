@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+____________________________________________________________________________________
+
+Allgemeine Attribute in der Beratung
+
+____________________________________________________________________________________
+
+Revision History:
+____________________________________________________________________________________
+
+1.0 18.10.2017 - Heinke - initial
+____________________________________________________________________________________
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:kcom="http://svi.de/kdf/ei/common/v1" xmlns:kbrtg="http://svi.de/kdf/beratung/v1" targetNamespace="http://svi.de/kdf/beratung/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:documentation>Allgemeine Attribute in der Beratung</xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://svi.de/kdf/ei/common/v1" schemaLocation="de.svi.kdf.ei.common.xsd"/>
+    <xs:element name="angesprocheneChance" type="kbrtg:angesprocheneChanceType">
+        <xs:annotation>
+            <xs:documentation>Im Falle eines Kontaktes mit CrossUpSelling-Chance die angesprochene Chance</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:simpleType name="angesprocheneChanceType">
+        <xs:annotation>
+            <xs:documentation>Im Falle eines Kontaktes mit CrossUpSelling-Chance die angesprochene Chance</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="kcom:string200Type"/>
+    </xs:simpleType>
+
+</xs:schema>

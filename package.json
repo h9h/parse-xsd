@@ -1,0 +1,54 @@
+{
+  "name": "parse-xsd",
+  "version": "1.0.0",
+  "description": "Parse XSD to JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "eslint": "eslint **/*.js --ignore-pattern node_modules/"
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "describe": true,
+      "it": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h9h/parse-xsd.git"
+  },
+  "keywords": [
+    "xsd",
+    "xml",
+    "parser",
+    "xml-schema",
+    "json"
+  ],
+  "author": "Michael Heinke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/h9h/parse-xsd/issues"
+  },
+  "homepage": "https://github.com/h9h/parse-xsd#readme",
+  "dependencies": {
+    "find-up": "^2.1.0",
+    "ramda": "^0.25.0",
+    "xml2js": "^0.4.19",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "deep-diff": "^1.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "mocha": "^5.1.1"
+  }
+}

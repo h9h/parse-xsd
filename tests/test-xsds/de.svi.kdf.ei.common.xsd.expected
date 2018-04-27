@@ -1,0 +1,1083 @@
+{
+  "element": [
+    {
+      "name": "lfdNummer",
+      "type": "kcom:lfdNummerType"
+    },
+    {
+      "annotation": {
+        "documentation": "allgemeiner Typ für technische IDs eines Businessobjektes, i.d.R. aus DB-Sequences"
+      },
+      "name": "identifier",
+      "type": "xs:unsignedInt"
+    },
+    {
+      "name": "valuta",
+      "type": "kcom:valutaType"
+    },
+    {
+      "annotation": {
+        "documentation": "Nummer des ersten zurückzugebenden Datensatzes (Pagination, Verwendung in Kombination mit ei.common.Anzahl)"
+      },
+      "name": "offset",
+      "type": "kcom:offsetType"
+    },
+    {
+      "annotation": {
+        "documentation": "Flag, dass weitere Datensätze vorliegen"
+      },
+      "name": "weitereSaetzeVorhanden",
+      "type": "kcom:weitereSaetzeVorhandenType"
+    },
+    {
+      "name": "anzahl",
+      "type": "kcom:anzahlType"
+    },
+    {
+      "annotation": {
+        "documentation": "Gueltigkeits-Beginndatum eines Objektes"
+      },
+      "name": "gueltigAbDatum",
+      "type": "kcom:datumType"
+    },
+    {
+      "annotation": {
+        "documentation": "Gueltigkeits-Endedatum eines Objektes"
+      },
+      "name": "gueltigBisDatum",
+      "type": "kcom:datumType"
+    },
+    {
+      "annotation": {
+        "documentation": "eine systemspezifische Kennung, die die Identifikation eine physischen/logischen Instanz des Systems erlaubt"
+      },
+      "name": "systemKennung",
+      "type": "kcom:systemKennungType"
+    },
+    {
+      "name": "fremdOrdnungsbegriff",
+      "type": "kcom:fremdOrdnungsbegriffType"
+    },
+    {
+      "name": "externerAuftragsschluessel",
+      "type": "kcom:externerAuftragsschluesselType"
+    },
+    {
+      "name": "versionsnummer",
+      "type": "kcom:versionsnummerType"
+    },
+    {
+      "annotation": {
+        "documentation": "Schlagworte zu einem Vorgang"
+      },
+      "name": "schlagwort",
+      "type": "kcom:schlagwortType"
+    },
+    {
+      "annotation": {
+        "documentation": "Kennzeichen am Einzelelement welches für Sortierung verwendet wird (z.B. am Produktbaustein, Deckung etc.). Der Sortieralgorithmus ist vom Consumer zu implementieren."
+      },
+      "name": "sortierkennzeichen",
+      "type": "kcom:sortierkennzeichenType"
+    },
+    {
+      "annotation": {
+        "documentation": "Quartal des Jahres: 1-4, falls Jahr benötigt, dieses im separaten jahrType übergeben"
+      },
+      "name": "quartal",
+      "type": "kcom:quartalType"
+    },
+    {
+      "annotation": {
+        "documentation": "Hashwert/Token der Länge 1024"
+      },
+      "name": "token1024",
+      "type": "kcom:token1024Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Der technische Identifier der Organisationseinheit (OU organizational unit)"
+      },
+      "name": "ouIdentifier",
+      "type": "kcom:ouIdentifierType"
+    },
+    {
+      "annotation": {
+        "documentation": "Ein nicht näher spezifizierter Benutzername (technisch oder auch persönlich)"
+      },
+      "name": "username",
+      "type": "kcom:usernameType"
+    },
+    {
+      "annotation": {
+        "documentation": "Skala zur Bewertung von Sachverhalten: 1 schlecht, bis 5 gut"
+      },
+      "name": "wertung",
+      "type": "kcom:wertungType"
+    },
+    {
+      "annotation": {
+        "documentation": "Beschreibung der Sache (Objekt, Vertrag, Deckung,..) statt expliziter Beschreibungsfelder wie nachweisartbeschreibung, beschreibungObjekt,..."
+      },
+      "name": "beschreibung",
+      "type": "kcom:beschreibungType"
+    }
+  ],
+  "simpleType": [
+    {
+      "annotation": {
+        "documentation": "allgemeiner Typ für technische IDs eines Businessobjektes, i.d.R. aus DB-Sequences"
+      },
+      "restriction": {
+        "base": "xs:unsignedInt"
+      },
+      "name": "identifierType"
+    },
+    {
+      "annotation": {
+        "documentation": "Gueltigkeits-Beginndatum einer Eigenschaft eines Objektes. Für Objekte selbst Ref auf das Element gueltigAbDatum verwenden"
+      },
+      "restriction": {
+        "base": "kcom:datumType"
+      },
+      "name": "gueltigAbDatumType"
+    },
+    {
+      "annotation": {
+        "documentation": "Gueltigkeits-Endedatum einer Eigenschaft eines Objektes. Für Objekte selbst Ref auf das Element gueltigBisDatum verwenden"
+      },
+      "restriction": {
+        "base": "kcom:datumType"
+      },
+      "name": "gueltigBisDatumType"
+    },
+    {
+      "annotation": {
+        "documentation": "Beliebiger Wert zur Kennzeichnung eines Auftrags durch den Auftraggeber. Diese ID wird zur Kommunikation innerhalb der Systeme weitergegeben und wird in den Rückgabeparametern unverändert übernommen und zurückgeliefert."
+      },
+      "restriction": {
+        "maxLength": "256",
+        "base": "xs:string"
+      },
+      "name": "externerAuftragsschluesselType"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 15 Ziffern insgesamt"
+      },
+      "restriction": {
+        "totalDigits": "15",
+        "fractionDigits": "2",
+        "base": "xs:decimal"
+      },
+      "name": "dec15f2Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 9 Ziffern insgesamt"
+      },
+      "restriction": {
+        "totalDigits": "9",
+        "fractionDigits": "2",
+        "base": "xs:decimal"
+      },
+      "name": "dec9f2Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Betragstyp mit 1 Nachkommastelle, maximal 7 Ziffern insgesamt"
+      },
+      "restriction": {
+        "totalDigits": "7",
+        "fractionDigits": "1",
+        "base": "xs:decimal"
+      },
+      "name": "dec7f1Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 7 Ziffern insgesamt"
+      },
+      "restriction": {
+        "totalDigits": "7",
+        "fractionDigits": "2",
+        "base": "xs:decimal"
+      },
+      "name": "dec7f2Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Betragstyp mit 2 Nachkommastellen, maximal 5 Ziffern insgesamt"
+      },
+      "restriction": {
+        "totalDigits": "5",
+        "fractionDigits": "2",
+        "base": "xs:decimal"
+      },
+      "name": "dec5f2Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Betragstyp mit 4 Nachkommastellen, maximal 5 Ziffern insgesamt"
+      },
+      "restriction": {
+        "totalDigits": "5",
+        "fractionDigits": "4",
+        "base": "xs:decimal"
+      },
+      "name": "dec5f4Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Betragstyp mit 4 Nachkommastellen, maximal 10 Ziffern insgesamt."
+      },
+      "restriction": {
+        "totalDigits": "10",
+        "fractionDigits": "4",
+        "base": "xs:decimal"
+      },
+      "name": "dec10f4Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Betragstyp mit 7 Nachkommastellen, maximal 10 Ziffern insgesamt."
+      },
+      "restriction": {
+        "totalDigits": "10",
+        "fractionDigits": "7",
+        "base": "xs:decimal"
+      },
+      "name": "dec10f7Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Betragstyp mit 6 Nachkommastellen, maximal 9 Ziffern insgesamt."
+      },
+      "restriction": {
+        "totalDigits": "9",
+        "fractionDigits": "6",
+        "base": "xs:decimal"
+      },
+      "name": "dec9f6Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Betragstyp mit 4 Nachkommastellen, maximal 7 Ziffern insgesamt. Insbesondere für den Wert von Prozentzahlen."
+      },
+      "restriction": {
+        "totalDigits": "7",
+        "fractionDigits": "4",
+        "base": "xs:decimal"
+      },
+      "name": "dec7f4Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Betragstyp mit 16 Nachkommastellen, maximal 19 Ziffern insgesamt."
+      },
+      "restriction": {
+        "totalDigits": "19",
+        "fractionDigits": "16",
+        "base": "xs:decimal"
+      },
+      "name": "dec19f16Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Nicht-negativer Ganzzahltyp mit maximal 3 Ziffern insgesamt. Insbesondere für Dauern in Jahren."
+      },
+      "restriction": {
+        "totalDigits": "3",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "nonNegInt3Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Nicht-negativer Ganzzahltyp mit maximal 4 Ziffern insgesamt. Insbesondere für Dauern in Monaten."
+      },
+      "restriction": {
+        "totalDigits": "4",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "nonNegInt4Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Valuta Datum"
+      },
+      "restriction": {
+        "base": "xs:date"
+      },
+      "name": "valutaType"
+    },
+    {
+      "annotation": {
+        "documentation": "Nummer des ersten zurückzugebenden Datensatzes (Pagination, Verwendung in Kombination mit ei.common.Anzahl)"
+      },
+      "restriction": {
+        "base": "kcom:posInt10Type"
+      },
+      "name": "offsetType"
+    },
+    {
+      "annotation": {
+        "documentation": "Flag, dass weitere Datensätze vorliegen"
+      },
+      "restriction": {
+        "base": "xs:boolean"
+      },
+      "name": "weitereSaetzeVorhandenType"
+    },
+    {
+      "annotation": {
+        "documentation": "Anzahl von etwas"
+      },
+      "restriction": {
+        "totalDigits": "9",
+        "base": "xs:integer"
+      },
+      "name": "anzahlType"
+    },
+    {
+      "annotation": {
+        "documentation": "Jahresunabhängiges Datum \"TT.MM.\""
+      },
+      "restriction": {
+        "length": "6",
+        "pattern": "[0-3][0-9]\\.[0-1][0-9]\\.",
+        "base": "xs:string"
+      },
+      "name": "tagMonatType"
+    },
+    {
+      "annotation": {
+        "documentation": "Jahr (ohne Zeitzone)"
+      },
+      "restriction": {
+        "pattern": "\\d{4}",
+        "base": "xs:gYear"
+      },
+      "name": "jahrType"
+    },
+    {
+      "annotation": {
+        "documentation": "Monat MM (01 - 12)"
+      },
+      "restriction": {
+        "pattern": "\\d{2}",
+        "base": "kcom:string2Type"
+      },
+      "name": "monatType"
+    },
+    {
+      "annotation": {
+        "documentation": "Datum YYYY-MM-TT (ohne Zeitzone)"
+      },
+      "restriction": {
+        "pattern": "\\d{4}-\\d{2}-\\d{2}",
+        "base": "xs:date"
+      },
+      "name": "datumType"
+    },
+    {
+      "annotation": {
+        "documentation": "Jahr-Monat YYYY-MM (ohne Zeitzone)"
+      },
+      "restriction": {
+        "pattern": "\\d{4}-\\d{2}",
+        "base": "xs:gYearMonth"
+      },
+      "name": "jahrMonatType"
+    },
+    {
+      "annotation": {
+        "documentation": "Zeit hh:mm:ss (ohne Zeitzone)"
+      },
+      "restriction": {
+        "pattern": "\\d{2}:\\d{2}:\\d{2}",
+        "base": "xs:time"
+      },
+      "name": "zeitType"
+    },
+    {
+      "annotation": {
+        "documentation": "ein Zeitstempel YYYY-MM-TT hh:mm:ss[.nnn] (ohne Zeitzone)"
+      },
+      "restriction": {
+        "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,3})?",
+        "base": "xs:dateTime"
+      },
+      "name": "zeitstempelType"
+    },
+    {
+      "annotation": {
+        "documentation": "laufende Nummer eines Businessobjekts"
+      },
+      "restriction": {
+        "base": "xs:unsignedInt"
+      },
+      "name": "lfdNummerType"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Ordnungsbegriff für z.B. fremdverwaltete Bestände"
+      },
+      "restriction": {
+        "maxLength": "40",
+        "base": "xs:string"
+      },
+      "name": "fremdOrdnungsbegriffType"
+    },
+    {
+      "annotation": {
+        "documentation": "Allgemeiner Typ für ja, nein, unbekannt Attribute"
+      },
+      "restriction": {
+        "maxLength": "9",
+        "enumeration": [
+          "ja",
+          "nein",
+          "unbekannt"
+        ],
+        "base": "xs:string"
+      },
+      "name": "jaNeinUnbekanntType"
+    },
+    {
+      "restriction": {
+        "maxLength": "16",
+        "base": "xs:string"
+      },
+      "name": "systemKennungType"
+    },
+    {
+      "annotation": {
+        "documentation": "Gibt eine Wertung in den Ampelfarben an"
+      },
+      "restriction": {
+        "maxLength": "9",
+        "enumeration": [
+          {
+            "annotation": {
+              "documentation": "eine negative Wertung"
+            },
+            "value": "rot"
+          },
+          {
+            "annotation": {
+              "documentation": "eine neutrale Wertung"
+            },
+            "value": "gelb"
+          },
+          {
+            "annotation": {
+              "documentation": "eine positive Wertung"
+            },
+            "value": "gruen"
+          },
+          "unbekannt"
+        ],
+        "base": "xs:string"
+      },
+      "name": "ampelStatusEnum"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal einem Zeichen"
+      },
+      "restriction": {
+        "maxLength": "1",
+        "base": "xs:string"
+      },
+      "name": "string1Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal zwei Zeichen"
+      },
+      "restriction": {
+        "maxLength": "2",
+        "base": "xs:string"
+      },
+      "name": "string2Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal drei Zeichen"
+      },
+      "restriction": {
+        "maxLength": "3",
+        "base": "xs:string"
+      },
+      "name": "string3Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal vier Zeichen"
+      },
+      "restriction": {
+        "maxLength": "4",
+        "base": "xs:string"
+      },
+      "name": "string4Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal fünf Zeichen"
+      },
+      "restriction": {
+        "maxLength": "5",
+        "base": "xs:string"
+      },
+      "name": "string5Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal sechs Zeichen"
+      },
+      "restriction": {
+        "maxLength": "6",
+        "base": "xs:string"
+      },
+      "name": "string6Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal sieben Zeichen"
+      },
+      "restriction": {
+        "maxLength": "7",
+        "base": "xs:string"
+      },
+      "name": "string7Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal acht Zeichen"
+      },
+      "restriction": {
+        "maxLength": "8",
+        "minLength": "1",
+        "base": "xs:string"
+      },
+      "name": "string8Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal neun Zeichen"
+      },
+      "restriction": {
+        "maxLength": "9",
+        "base": "xs:string"
+      },
+      "name": "string9Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal zehn Zeichen"
+      },
+      "restriction": {
+        "maxLength": "10",
+        "base": "xs:string"
+      },
+      "name": "string10Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal elf Zeichen"
+      },
+      "restriction": {
+        "maxLength": "11",
+        "base": "xs:string"
+      },
+      "name": "string11Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal zwölf Zeichen"
+      },
+      "restriction": {
+        "maxLength": "12",
+        "base": "xs:string"
+      },
+      "name": "string12Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 15 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "15",
+        "base": "xs:string"
+      },
+      "name": "string15Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 16 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "16",
+        "base": "xs:string"
+      },
+      "name": "string16Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 17 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "17",
+        "base": "xs:string"
+      },
+      "name": "string17Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 18 Zeichen"
+      },
+      "restriction": {
+        "minLength": "1",
+        "maxLength": "18",
+        "base": "xs:string"
+      },
+      "name": "string18Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 20 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "20",
+        "base": "xs:string"
+      },
+      "name": "string20Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 21 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "21",
+        "base": "xs:string"
+      },
+      "name": "string21Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 25 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "25",
+        "base": "xs:string"
+      },
+      "name": "string25Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 30 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "30",
+        "base": "xs:string"
+      },
+      "name": "string30Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 32 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "32",
+        "base": "xs:string"
+      },
+      "name": "string32Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 35 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "35",
+        "base": "xs:string"
+      },
+      "name": "string35Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 40 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "40",
+        "base": "xs:string"
+      },
+      "name": "string40Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 50 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "50",
+        "base": "xs:string"
+      },
+      "name": "string50Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 64 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "64",
+        "base": "xs:string"
+      },
+      "name": "string64Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 70 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "70",
+        "base": "xs:string"
+      },
+      "name": "string70Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 80 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "80",
+        "base": "xs:string"
+      },
+      "name": "string80Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 100 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "100",
+        "base": "xs:string"
+      },
+      "name": "string100Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 128 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "128",
+        "minLength": "1",
+        "base": "xs:string"
+      },
+      "name": "string128Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 200 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "200",
+        "minLength": "1",
+        "base": "xs:string"
+      },
+      "name": "string200Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 255 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "255",
+        "base": "xs:string"
+      },
+      "name": "string255Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 300 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "300",
+        "minLength": "1",
+        "base": "xs:string"
+      },
+      "name": "string300Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 400 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "400",
+        "minLength": "1",
+        "base": "xs:string"
+      },
+      "name": "string400Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 1024 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "1024",
+        "base": "xs:string"
+      },
+      "name": "string1024Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 2000 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "2000",
+        "base": "xs:string"
+      },
+      "name": "string2000Type"
+    },
+    {
+      "annotation": {
+        "documentation": "String mit maximal 4000 Zeichen"
+      },
+      "restriction": {
+        "maxLength": "4000",
+        "base": "xs:string"
+      },
+      "name": "string4000Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Nummer einer Version eines Businessobjektes"
+      },
+      "restriction": {
+        "minInclusive": "0",
+        "base": "xs:int"
+      },
+      "name": "versionsnummerType"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 1 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "1",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt1Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 2 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "2",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt2Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 3 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "3",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt3Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 5 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "5",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt5Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 4 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "4",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt4Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 6 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "6",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt6Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 7 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "7",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt7Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 9 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "9",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt9Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 10 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "10",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt10Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 13 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "10",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt13Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Positiver Integer mit maximal 20 Ziffern"
+      },
+      "restriction": {
+        "totalDigits": "20",
+        "base": "xs:nonNegativeInteger"
+      },
+      "name": "posInt20Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Schlagworte zu einem Vorgang"
+      },
+      "restriction": {
+        "base": "kcom:string255Type"
+      },
+      "name": "schlagwortType"
+    },
+    {
+      "annotation": {
+        "documentation": "Kennzeichen am Einzelelement welches für Sortierung verwendet wird (z.B. am Produktbaustein, Deckung etc.). Der Sortieralgorithmus ist vom Consumer zu implementieren."
+      },
+      "restriction": {
+        "minLength": "1",
+        "base": "kcom:string5Type"
+      },
+      "name": "sortierkennzeichenType"
+    },
+    {
+      "annotation": {
+        "documentation": "Quartal des Jahres: 1-4, falls Jahr benötigt, dieses im separaten jahrType übergeben"
+      },
+      "restriction": {
+        "pattern": "[1-4]",
+        "base": "kcom:string1Type"
+      },
+      "name": "quartalType"
+    },
+    {
+      "annotation": {
+        "documentation": "Hashwert/Token der Länge 1024"
+      },
+      "restriction": {
+        "base": "kcom:string1024Type"
+      },
+      "name": "token1024Type"
+    },
+    {
+      "annotation": {
+        "documentation": "Der technische Identifier der Organisationseinheit (OU organizational unit)"
+      },
+      "restriction": {
+        "base": "kcom:string64Type"
+      },
+      "name": "ouIdentifierType"
+    },
+    {
+      "annotation": {
+        "documentation": "Ein nicht näher spezifizierter Benutzername (technisch oder auch persönlich)"
+      },
+      "restriction": {
+        "minLength": "1",
+        "base": "kcom:string80Type"
+      },
+      "name": "usernameType"
+    },
+    {
+      "annotation": {
+        "documentation": "Skala zur Bewertung von Sachverhalten: 1 schlecht, bis 5 gut, siehe Entries",
+        "appinfo": {
+          "entries": {
+            "entry": [
+              {
+                "key": "1",
+                "value": "ungenügend"
+              },
+              {
+                "key": "2",
+                "value": "mangelhaft"
+              },
+              {
+                "key": "3",
+                "value": "erwartungskonform"
+              },
+              {
+                "key": "4",
+                "value": "gut"
+              },
+              {
+                "key": "5",
+                "value": "herausragend"
+              }
+            ]
+          }
+        }
+      },
+      "restriction": {
+        "base": "kcom:posInt3Type"
+      },
+      "name": "wertungType"
+    },
+    {
+      "annotation": {
+        "documentation": "Beschreibung der Sache (Objekt, Vertrag, Deckung,..) statt expliziter Beschreibungsfelder wie nachweisartbeschreibung, beschreibungObjekt,..."
+      },
+      "restriction": {
+        "base": "kcom:string100Type"
+      },
+      "name": "beschreibungType"
+    }
+  ],
+  "meta": {
+    "annotation": {
+      "documentation": "Enthält allgemeine Attribute, die domänenübergreifend einsetzbar sind und nicht selber einer Domäne zuordenbar sind"
+    },
+    "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:kcom": "http://svi.de/kdf/ei/common/v1",
+    "targetNamespace": "http://svi.de/kdf/ei/common/v1",
+    "elementFormDefault": "qualified",
+    "attributeFormDefault": "unqualified"
+  }
+}
